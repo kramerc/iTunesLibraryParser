@@ -26,13 +26,15 @@ jobs:
       uses: NuGet/setup-nuget@v1.2.0
     - name: Restore dependencies
       run: nuget restore # dotnet restore does not fetch the dependencies with this legacy .NET Framework project
+    - name: Set VERSION variable from tag
+      run: echo "VERSION=${GITHUB_REF/refs\/tags\/v/}" >> $GITHUB_ENV
     - name: Build
-      run: dotnet build --no-restore --configuration Release
+      run: dotnet build --no-restore --configuration Release /p:Version=${VERSION}
     - name: Test
-      run: dotnet test --no-build --verbosity normal
+      run: dotnet test --no-build --verbosity normal --configuration Release /p:Version=${VERSION}
     - name: Pack
-      run: nuget pack ITunesLibraryParser\ITunesLibraryParser.nuspec
+      run: nuget pack ITunesLibraryParser\ITunesLibraryParser.nuspec /p:Version=${VERSION}
     - name: Publish NuGet
       run: |
         dotnet nuget add source https://nuget.pkg.github.com/${{ github.repository_owner }}/index.json --name github --username ${{ github.repository_owner }} --password ${{ secrets.GITHUB_TOKEN }} --store-password-in-clear-text
-        dotnet nuget push **/*.nupkg --source github --api-key ${{ secrets.GITHUB_TOKEN }}
+        dotnet nuget push ITunesLibraryParser.${VERSION}.nupkg --source github --api-key ${{ secrets.GITHUB_TOKEN }}
