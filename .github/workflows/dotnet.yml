@@ -20,12 +20,10 @@ jobs:
     - uses: actions/checkout@v3
     - name: Setup .NET
       uses: actions/setup-dotnet@v3
-    - name: Setup NuGet.exe for use with actions
-      # You may pin to the exact commit or the version.
-      # uses: NuGet/setup-nuget@296fd3ccf8528660c91106efefe2364482f86d6f
-      uses: NuGet/setup-nuget@v1.2.0
+      with:
+        dotnet-version: 6.0.x
     - name: Restore dependencies
-      run: nuget restore # dotnet restore does not fetch the dependencies with this legacy .NET Framework project
+      run: dotnet restore
     - name: Set VERSION variable from tag
       run: echo "VERSION=${GITHUB_REF/refs\/tags\/v/}" >> $GITHUB_ENV
     - name: Build
@@ -33,7 +31,7 @@ jobs:
     - name: Test
       run: dotnet test --no-build --verbosity normal --configuration Release /p:Version=${VERSION}
     - name: Pack
-      run: nuget pack ITunesLibraryParser\ITunesLibraryParser.nuspec /p:Version=${VERSION}
+      run: dotnet pack /p:Version=${VERSION} --configuration Release
     - name: Publish NuGet
       run: |
         dotnet nuget add source https://nuget.pkg.github.com/${{ github.repository_owner }}/index.json --name github --username ${{ github.repository_owner }} --password ${{ secrets.GITHUB_TOKEN }} --store-password-in-clear-text
