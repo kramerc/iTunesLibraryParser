@@ -31,8 +31,8 @@ jobs:
     - name: Test
       run: dotnet test --no-build --verbosity normal
     - name: Pack
-      run: nuget pack ITunesLibraryParser/ITunesLibraryParser.nuspec
+      run: nuget pack ITunesLibraryParser\ITunesLibraryParser.nuspec
     - name: Add NuGet Source
       run: dotnet nuget add source --username kramerc --password ${{ secrets.GITHUB_TOKEN }} --store-password-in-clear-text --name github "https://nuget.pkg.github.com/kramerc/index.json"
     - name: Publish NuGet
-      run: dotnet nuget push "bin/Release/iTunesLibraryParser.1.0.0.nupkg"  --api-key ${{ secrets.GITHUB_TOKEN }} --source "github"
+      run: dotnet nuget push "iTunesLibraryParser\iTunesLibraryParser.1.0.0.nupkg"  --api-key ${{ secrets.GITHUB_TOKEN }} --source "github"
