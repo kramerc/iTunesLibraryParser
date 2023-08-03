@@ -13,6 +13,12 @@
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
+    <PackageId>iTunesLibraryParser</PackageId>
+    <Version>1.0.0</Version>
+    <Authors>Anthony Sciamanna</Authors>
+    <Company>Anthony Sciamanna</Company>
+    <PackageDescription>Parses an iTunes Library XML file (PropertyList format)</PackageDescription>
+    <RepositoryUrl>https://github.com/kramerc/ITunesLibraryParser</RepositoryUrl>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
