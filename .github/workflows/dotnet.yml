@@ -35,4 +35,4 @@ jobs:
     - name: Pack
       run: nuget pack ITunesLibraryParser\ITunesLibraryParser.nuspec
     - name: Publish NuGet
-      run: dotnet nuget push "iTunesLibraryParser.1.0.0.nupkg" --source "github"
+      run: dotnet nuget push "iTunesLibraryParser.1.0.0.nupkg"
