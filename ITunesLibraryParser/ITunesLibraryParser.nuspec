@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>iTunesLibraryParser</id>
-    <version>$version$</version>
+    <version>1.0.0</version>
     <title>iTunes Library Parser</title>
     <authors>Anthony Sciamanna</authors>
     <owners>Anthony Sciamanna</owners>
