@@ -13,6 +13,7 @@ jobs:
   build:
     runs-on: windows-2019
     permissions:
+      contents: read
       packages: write
 
     steps:
@@ -33,5 +34,5 @@ jobs:
       run: nuget pack ITunesLibraryParser\ITunesLibraryParser.nuspec
     - name: Publish NuGet
       run: |
-        dotnet nuget add source https://nuget.pkg.github.com/${{ github.repository_owner }}/index.json --name github --username ${{ github.repository_owner }} --password ${{ github.token }} --store-password-in-clear-text
-        dotnet nuget push **/*.nupkg --source github --api-key ${{ github.token }}
+        dotnet nuget add source https://nuget.pkg.github.com/${{ github.repository_owner }}/index.json --name github --username ${{ github.repository_owner }} --password ${{ secrets.GITHUB_TOKEN }} --store-password-in-clear-text
+        dotnet nuget push **/*.nupkg --source github --api-key ${{ secrets.GITHUB_TOKEN }}
