@@ -25,7 +25,6 @@ jobs:
     - name: Restore dependencies
       run: dotnet restore
     - name: Set VERSION variable from tag
-      if: ${{ github.ref_type == 'tag' }}
       env:
         TAG: ${{ github.ref_name }}
       run: echo "VERSION=${TAG#v}" >> $GITHUB_ENV
