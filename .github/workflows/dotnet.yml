@@ -33,6 +33,7 @@ jobs:
     - name: Test
       run: dotnet test --no-build --verbosity normal --configuration Release /p:Version=${VERSION}
     - name: Pack
+      if: github.ref_type == 'tag' && startsWith(github.ref, 'refs/tags/v')
       run: dotnet pack /p:Version=${VERSION} --configuration Release
     - name: Publish NuGet
       if: github.ref_type == 'tag' && startsWith(github.ref, 'refs/tags/v')
