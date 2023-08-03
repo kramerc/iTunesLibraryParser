@@ -24,7 +24,7 @@ jobs:
       # uses: NuGet/setup-nuget@296fd3ccf8528660c91106efefe2364482f86d6f
       uses: NuGet/setup-nuget@v1.2.0
     - name: Restore dependencies
-      run: nuget restore
+      run: nuget restore # dotnet restore does not fetch the dependencies with this legacy .NET Framework project
     - name: Build
       run: dotnet build --no-restore --configuration Release
     - name: Test
@@ -34,4 +34,4 @@ jobs:
     - name: Publish NuGet
       run: |
         dotnet nuget add source https://nuget.pkg.github.com/${{ github.repository_owner }}/index.json --name github --username ${{ github.repository_owner }} --password ${{ github.token }} --store-password-in-clear-text
-        dotnet nuget push **/*.nupkg --source github
+        dotnet nuget push **/*.nupkg --source github --api-key ${{ github.token }}
